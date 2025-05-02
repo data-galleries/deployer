@@ -1,0 +1,29 @@
+config.json
+
+# Python
+*.pyc
+*.pyo
+__pycache__
+
+# Virtual Environment
+venv/
+env/
+.venv/
+.env/
+
+# IDEs and Editors
+.vscode/
+.idea/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Python-specific files
+*.egg
+*.egg-info
+dist/
+build/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/

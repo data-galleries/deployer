@@ -1,0 +1,36 @@
+{
+	"*": {
+		"builder": "../builders/webApp.py",
+		"bicep": "../bicep/webApp.bicep"
+	},
+	"subscription": {
+		"name": "Visual Studio Enterprise Subscription",
+		"id": "36581d35-9a19-46ef-a7d2-c9e29e726778",
+		"tenantId": "12562613-3e1c-4168-91c4-29052abe8e29"
+	},
+	"resourceGroup": {
+		"location": "eastus2"
+	},
+	"webApp":
+	{
+		"settings": []
+	},
+	"storageAccount": {
+		"kind": "Storage",
+		"sku": {
+			"name": "Standard_LRS"
+		}
+	},
+	"keyVault": {
+		"sku": {
+			"name": "standard",
+			"family": "A"
+		}
+	},
+	"serverFarm": {
+		"sku": {
+			"name": "B1",
+			"tier": "Basic"
+		}
+	}
+}

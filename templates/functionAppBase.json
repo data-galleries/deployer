@@ -1,0 +1,49 @@
+{
+	"*": "*.../builders/functionApp.py#build",
+	"bicep": "../bicep/functionApp.bicep",
+	"resourceGroup": {
+		"location": "eastus2"
+	},
+	"functionApp": {
+		"settings": [
+			{
+				"name": "DotNetWorkerRuntime",
+				"value": "net8.0"
+			},
+			{
+				"name": "FUNCTIONS_INPROC_NET8_ENABLED",
+				"value": "1"
+			},
+			{
+				"name": "FUNCTIONS_EXTENSION_VERSION",
+				"value": "~4"
+			},
+			{
+				"name": "FUNCTIONS_WORKER_RUNTIME",
+				"value": "dotnet"
+			},
+			{
+				"name": "AzureWebJobsDisableHomepage",
+				"value": "true"
+			}
+		]
+	},
+	"storageAccount": {
+		"kind": "Storage",
+		"sku": {
+			"name": "Standard_LRS"
+		}
+	},
+	"keyVault": {
+		"sku": {
+			"name": "standard",
+			"family": "A"
+		}
+	},
+	"serverFarm": {
+		"sku": {
+			"name": "Y1",
+			"tier": "Dynamic"
+		}
+	}
+}

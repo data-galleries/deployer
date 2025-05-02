@@ -1,0 +1,6 @@
+{
+	"*": {
+		"builder": "../builders/staticWebApp.py",
+		"bicep": "../bicep/staticWebApp.bicep"
+	}
+}
