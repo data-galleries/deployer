@@ -1,6 +1,6 @@
 {
-	"*": "*.../builders/functionApp.py#build",
-	"bicep": "../bicep/functionApp.bicep",
+	"!": "https://raw.githubusercontent.com/data-galleries/deployer/main/builders/functionApp.py#build",
+	"bicep": "https://raw.githubusercontent.com/data-galleries/deployer/main/bicep/functionApp.bicep",
 	"resourceGroup": {
 		"location": "eastus2"
 	},
