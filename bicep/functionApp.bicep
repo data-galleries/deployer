@@ -51,8 +51,7 @@ resource FunctionApp 'Microsoft.Web/sites@2024-04-01' = {
     serverFarmId: ServerFarm.id
     siteConfig: {
       appSettings: generated_appConfig
-      use32BitWorkerProcess: false
-      netFrameworkVersion: 'v6.0'
+			alwaysOn: true
     }
     httpsOnly: true
   }
