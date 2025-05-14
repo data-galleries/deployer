@@ -40,7 +40,7 @@ var generated_appConfig = concat(functionApp.settings, [
   }
 ])
 
-resource FunctionApp 'Microsoft.Web/sites@2021-03-01' = {
+resource FunctionApp 'Microsoft.Web/sites@2024-04-01' = {
   name: functionApp.name
   location: resourceGroup.location
   kind: 'functionapp'
@@ -58,7 +58,7 @@ resource FunctionApp 'Microsoft.Web/sites@2021-03-01' = {
   }
 }
 
-resource KeyVault 'Microsoft.KeyVault/vaults@2021-06-01-preview' = {
+resource KeyVault 'Microsoft.KeyVault/vaults@2024-11-01' = {
   name: keyVault.name
   location: resourceGroup.location
   properties: {
@@ -95,54 +95,41 @@ resource KeyVault 'Microsoft.KeyVault/vaults@2021-06-01-preview' = {
 }
 
 // Blob Owner
-resource BlobOwner 'Microsoft.Authorization/roleDefinitions@2018-01-01-preview' existing = {
-  scope: StorageAccount
-  name: 'b7e6dc6d-f1e8-4753-8033-0f276bb0955b' 
-}
-
-var blobOwnerExists = empty(resourceId('Microsoft.Authorization/roleAssignments', guid(StorageAccount.name, FunctionApp.name, 'BlobOwnerRoleAssignment')))
+var blobOwnerGuid = guid(StorageAccount.id, FunctionApp.name, 'BlobOwnerRoleAssignment')
+var blobOwnerExists = empty(resourceId(StorageAccount.id, 'Microsoft.Authorization/roleAssignments',blobOwnerGuid))
 
 resource BlobOwnerRoleAssignment 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = if(blobOwnerExists) {
   scope: StorageAccount
-  name: guid(storageAccount.name, functionApp.name, 'BlobOwnerRoleAssignment')
+  name: blobOwnerGuid
   properties: {
-    roleDefinitionId: BlobOwner.id
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'b7e6dc6d-f1e8-4753-8033-0f276bb0955b')
     principalId: FunctionApp.identity.principalId
     principalType: 'ServicePrincipal'
   }
 }
 
-// Table Contributor
-resource TableContributor 'Microsoft.Authorization/roleDefinitions@2018-01-01-preview' existing = {
-  scope: StorageAccount
-  name: '0a9a7e1f-b9d0-4cc4-a60d-0319b160aaa3' 
-}
 
-var tableContributorExists = empty(resourceId('Microsoft.Authorization/roleAssignments', guid(StorageAccount.name, FunctionApp.name, 'TableContributorRoleAssignment')))
+var tableContributorGuid = guid(StorageAccount.id, FunctionApp.name, 'TableContributorRoleAssignment')
+var tableContributorExists = empty(resourceId(StorageAccount.id, 'Microsoft.Authorization/roleAssignments', tableContributorGuid))
 
 resource TableContributorRoleAssignment 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = if (tableContributorExists) {
   scope: StorageAccount
-  name: guid(storageAccount.name, functionApp.name, 'TableContributorRoleAssignment')
+  name: tableContributorGuid
   properties: {
-    roleDefinitionId: TableContributor.id
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '0a9a7e1f-b9d0-4cc4-a60d-0319b160aaa3')
     principalId: FunctionApp.identity.principalId
     principalType: 'ServicePrincipal'
   }
 }
 
-// Queue Contributor
-resource QueueContributor 'Microsoft.Authorization/roleDefinitions@2018-01-01-preview' existing = {
-  scope: StorageAccount
-  name: '974c5e8b-45b9-4653-ba55-5f855dd0fb88' 
-}
+var queueContributorGuid = guid(StorageAccount.id, FunctionApp.name, 'QueueContributorRoleAssignment')
+var queueContributorExists = empty(resourceId(StorageAccount.id, 'Microsoft.Authorization/roleAssignments', queueContributorGuid))
 
-var queueContributorExists = empty(resourceId('Microsoft.Authorization/roleAssignments', guid(StorageAccount.name, FunctionApp.name, 'QueueContributorRoleAssignment')))
-
-resource QueueContributorRoleAssignment 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = if(queueContributorExists) {
+resource QueueContributorRoleAssignment 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = if (queueContributorExists) {
+  name: queueContributorGuid
   scope: StorageAccount
-  name: guid(storageAccount.name, functionApp.name, 'QueueContributorRoleAssignment')
   properties: {
-    roleDefinitionId: QueueContributor.id
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '974c5e8b-45b9-4653-ba55-5f855dd0fb88')
     principalId: FunctionApp.identity.principalId
     principalType: 'ServicePrincipal'
   }
