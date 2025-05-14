@@ -51,7 +51,6 @@ resource FunctionApp 'Microsoft.Web/sites@2024-04-01' = {
     serverFarmId: ServerFarm.id
     siteConfig: {
       appSettings: generated_appConfig
-			alwaysOn: true
     }
     httpsOnly: true
   }
