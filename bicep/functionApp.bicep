@@ -96,9 +96,8 @@ resource KeyVault 'Microsoft.KeyVault/vaults@2024-11-01' = {
 
 // Blob Owner
 var blobOwnerGuid = guid(StorageAccount.id, FunctionApp.name, 'BlobOwnerRoleAssignment')
-var blobOwnerExists = empty('${StorageAccount.id}/providers/Microsoft.Authorization/roleAssignments/${blobOwnerGuid}')
 
-resource BlobOwnerRoleAssignment 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = if(blobOwnerExists) {
+resource BlobOwnerRoleAssignment 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = {
   scope: StorageAccount
   name: blobOwnerGuid
   properties: {
@@ -109,9 +108,8 @@ resource BlobOwnerRoleAssignment 'Microsoft.Authorization/roleAssignments@2020-0
 }
 
 var tableContributorGuid = guid(StorageAccount.id, FunctionApp.name, 'TableContributorRoleAssignment')
-var tableContributorExists = empty('${StorageAccount.id}/providers/Microsoft.Authorization/roleAssignments/${tableContributorGuid}')
 
-resource TableContributorRoleAssignment 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = if (tableContributorExists) {
+resource TableContributorRoleAssignment 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = {
   scope: StorageAccount
   name: tableContributorGuid
   properties: {
@@ -122,9 +120,8 @@ resource TableContributorRoleAssignment 'Microsoft.Authorization/roleAssignments
 }
 
 var queueContributorGuid = guid(StorageAccount.id, FunctionApp.name, 'QueueContributorRoleAssignment')
-var queueContributorExists = empty('${StorageAccount.id}/providers/Microsoft.Authorization/roleAssignments/${queueContributorGuid}')
 
-resource QueueContributorRoleAssignment 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = if (queueContributorExists) {
+resource QueueContributorRoleAssignment 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = {
   name: queueContributorGuid
   scope: StorageAccount
   properties: {
