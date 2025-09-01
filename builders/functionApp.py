@@ -1,5 +1,5 @@
 
-from luke_lib.dict_helpers import try_add
+from pylib.dict_helpers import try_add
 
 def build(config : dict) :
     name = config['name']

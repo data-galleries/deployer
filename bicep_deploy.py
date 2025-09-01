@@ -3,7 +3,7 @@ import os
 from azure.identity import DefaultAzureCredential
 from azure.mgmt.resource import ResourceManagementClient
 from build_bicep_params import build_bicep_params
-from jsonic.loader import Load, ResolveLocalPath
+from jsonic.loader import Load
 import subprocess
 import requests
 import uuid
@@ -62,7 +62,7 @@ def deploy_with_bicep(configPath):
             bicep_file.write(bicepContent)
 
     else:
-         bicepPath = ResolveLocalPath(configPath, config['bicep'])
+        raise Exception("$.bicep must resolve to a url")
 
     build_bicep_params(bicepPath, config, paramFilePath)
 

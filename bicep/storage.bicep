@@ -9,6 +9,5 @@ resource StorageAccount 'Microsoft.Storage/storageAccounts@2022-05-01' = {
   properties: {
     supportsHttpsTrafficOnly: true
     defaultToOAuthAuthentication: true
-    allowBlobPublicAccess: storageAccount.allowBlobPublicAccess ?? false
   }
 }
